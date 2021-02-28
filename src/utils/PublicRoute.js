@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 function PublicRoute({ component: Component, isAuthenticated, ...rest }) {
 
   return (
-    <Route {...rest} render={(props) => !isAuthenticated ? <Component {...props} /> : <Redirect to={{ pathname: '/home' }} />} />
+    <Route {...rest} render={(props) => !isAuthenticated ? <Component {...props} /> : <Redirect to={{ pathname: '/' }} />} />
   )
 }
 

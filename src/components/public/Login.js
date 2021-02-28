@@ -3,6 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { handleInputChange, authLogin, clearAuthForm } from '../../redux/actions/auth.actions';
 import { Spinner } from '../layouts/Spinner';
+import { TextField, Grid, Button, Card, Typography, CardContent } from '@material-ui/core';
 
 function Login({ auth: { email, password, loading, user_data: { isAuthenticated } }, handleInputChange, authLogin, clearAuthForm }) {
 
@@ -15,27 +16,40 @@ function Login({ auth: { email, password, loading, user_data: { isAuthenticated 
     }
 
     return (
-        <div className="flex justify-center pt-32">
-            <div className="shadow sm:w-full sm:m-10 md:w-96 p-10 bg-white">
-                <h3 className="font-bold pb-2 text-2xl border-b mb-4">Sing In</h3>
-                {
-                    loading === 'auth' ? <div className="my-20"><Spinner/></div> : 
-                    <>
-                        <div className="py-2">
-                            <div className="text-gray-900 mb-2">Email:</div>
-                            <input name="email" value={email} onChange={handleInputChange} className="shadow p-2 w-full focus:outline-none focus:ring-2 focus:ring-yellow-500 rounded" type="email" placeholder="Enter Email"/>
-                        </div>
-                        <div className="py-2">
-                            <div className="text-gray-900 mb-2">Password:</div>
-                            <input name="password" value={password} onChange={handleInputChange} className="shadow p-2 w-full focus:outline-none focus:ring-2 focus:ring-yellow-500 rounded" type="password" placeholder="Enter Password"/>
-                        </div>
-                        <div className="mt-5">
-                            <button onClick={authLogin} className=" text-white bg-yellow-500 hover:bg-black py-2 px-3 w-full">Login </button>
-                        </div>
-                    </>
-                }
-            </div>
-        </div>
+        <Grid container justify="center"  alignItems="center" spacing={3} direction="column" style={{ height: '900px'}}>
+            {
+                loading === 'auth' ? <div className="my-20"><Spinner/></div> : 
+                <>
+                    <Grid container direction="row" spacing={3} sm={8} xs={10}>
+                        <Grid item xs={0} sm={4}/>
+                        <Grid item xs={12} sm={4} >
+                            <Card elevation={10}>
+                                <CardContent>
+                                    <form onSubmit={authLogin}>
+                                        <Grid container direction="column" spacing={4}>
+                                            <Grid item xs={12}>
+                                                <Typography variant="h4">Sign In</Typography>
+                                            </Grid>
+                                            <Grid item>
+                                                <TextField value={email} onChange={handleInputChange} name="email" label="Email" variant="outlined" size="medium" fullWidth/>
+                                            </Grid>
+                                            <Grid item>
+                                                <TextField type="password" name="password" value={password} onChange={handleInputChange} label="Password" variant="outlined" size="medium" fullWidth/>
+                                            </Grid>
+                                            <Grid item>
+                                                <Button type="submit" variant="contained" color="default" fullWidth size="large" p="4">Login</Button>
+                                            </Grid>
+                                        </Grid>
+                                    </form>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                        <Grid item xs={0} sm={4}/>
+                    </Grid>
+
+                </>
+            }
+        </Grid>
     )
 }
 

@@ -19,6 +19,9 @@ import PageNotFound from './components/public/PageNotFound';
 import Home from './components/private/Home';
 import Navbar from './components/layouts/Navbar';
 
+
+import { Grid, Container } from '@material-ui/core';
+
 function App() {
 
   useEffect(() => {
@@ -36,7 +39,12 @@ function App() {
                 <PublicRoute path="/login" exact component={Login}/>
                 <PublicRoute path="/register" exact component={Register}/>
 
-                <PrivateRoute path="/home" exact component={Home} />
+                <Container style={{ marginTop: '40px' }}>
+                    <Grid item>
+                      <PrivateRoute path="/" exact component={Home} />
+                    </Grid>
+                </Container>
+
                 <PublicRoute component={PageNotFound} />
               </Switch>
             </Fragment>
